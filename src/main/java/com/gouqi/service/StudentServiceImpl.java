@@ -1,8 +1,8 @@
 package com.gouqi.service;
 
 
-import com.trtjk.beans.Student;
-import com.trtjk.dao.IStudentDao;
+import com.gouqi.entity.Student;
+import com.gouqi.dao.IStudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
