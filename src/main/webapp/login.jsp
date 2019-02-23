@@ -29,7 +29,8 @@
                 <div class="left">
                     <div class="content">
                         <div class="header">
-                            <div class="logo text-center"><img src="/assets/img/logo-dark.png" alt="Klorofil Logo"></div>
+                            <div class="logo text-center"><img src="/assets/img/logo-dark.png" alt="Klorofil Logo">
+                            </div>
                             <p class="lead">Login to your account</p>
                         </div>
                         <form class="form-auth-small" action="/user/login.do" method="post">
@@ -41,10 +42,11 @@
                                 <label for="signin-password" class="control-label sr-only">Password</label>
                                 <input type="password" class="form-control" id="signin-password" name="password">
                             </div>
-                              ${msg}
+                            ${msg}
                             <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                             <div class="bottom">
-                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a
+                                        href="#">Forgot password?</a></span>
                             </div>
                         </form>
                     </div>
@@ -52,8 +54,8 @@
                 <div class="right">
                     <div class="overlay"></div>
                     <div class="content text">
-                        <h1 class="heading">Free Bootstrap dashboard template</h1>
-                        <p>by The Develovers</p>
+                        <h1 class="heading">测试从入门到放弃</h1>
+                        <p>← 登录-从上贼船开始</p>
                     </div>
                 </div>
                 <div class="clearfix"></div>
