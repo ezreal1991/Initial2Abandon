@@ -66,6 +66,12 @@ public class UrlUtil {
         return interfaceBean;
     }
 
+    /**
+     * @Description 设置接口的执行结果
+     * @Date 13:20 2019/5/14
+     * @Param [testCase, itf]
+     * @return void
+     **/
     public static void setInfResult(TestCase testCase, InterfaceBean itf){
         if (itf.getActualMs() == null) {
             testCase.getErrorList().add(itf);
@@ -77,6 +83,7 @@ public class UrlUtil {
                 if (!"1".equals(code)) {
                     testCase.getFailList().add(itf);
                     itf.setInterfaceResult("fail");
+                    itf.setMsg("code的期望值是 1，但是实际值为" + code);
                 } else {
                     // 超时
                     if (Long.parseLong(itf.getActualMs()) > Long.parseLong(itf.getExpectMs())) {

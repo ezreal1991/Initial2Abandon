@@ -1,5 +1,7 @@
 package com.gouqi.testcase;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.gouqi.controller.RunCaseController;
 import com.gouqi.entity.InterfaceBean;
 import com.gouqi.entity.TestCase;
@@ -42,10 +44,20 @@ public class CollectionCase {
         HttpClientUtil.doGet(itf4);
         UrlUtil.setInfResult(testCase,itf1);
         UrlUtil.setInfResult(testCase,itf2);
-//        UrlUtil.setInfResult(testCase,itf3);
-//        UrlUtil.setInfResult(testCase,itf4);
+        UrlUtil.setInfResult(testCase,itf3);
+        if(itf3.getInterfaceResult().equals("pass") || itf3.getInterfaceResult().equals("warning")){
+            String resultName = itf3.getJsonResult().getJSONArray("data").getJSONObject(0).getString("name");
+            if(!"营养健康省钱菜".equals(resultName)){
+                itf3.setInterfaceResult("fail");
+                itf3.setMsg("预想结果：name = 营养健康省钱菜；实际结果：name = " + resultName);
+            }
+        }
+        System.out.println(itf3.getJsonResult().getJSONArray("data").getJSONObject(0).getString("name"));
+        UrlUtil.setInfResult(testCase,itf4);
         testCase.getTotalList().add(itf1);
         testCase.getTotalList().add(itf2);
+        testCase.getTotalList().add(itf3);
+        testCase.getTotalList().add(itf4);
         restultList.add(testCase);
     }
 }
