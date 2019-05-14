@@ -11,9 +11,8 @@
     <meta id="timeStampFormat" name="timeStampFormat"
           content='MMM d, yyyy hh:mm:ss a'/>
 
-    <link
-            href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
-            rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
+          rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 
@@ -234,12 +233,13 @@
 </div>
 </body>
 <script>
-    window.onload = function() {
-    	var divs = document.getElementsByName("detail");
-    	for (var i = 1; i < divs.length; i++) {
-    		divs[i].style.display = "none";
-    	}
+    window.onload = function () {
+        var divs = document.getElementsByName("detail");
+        for (var i = 1; i < divs.length; i++) {
+            divs[i].style.display = "none";
+        }
     }
+
     function showDetail(name) {
         var divs = document.getElementsByName("detail");
         for (var i = 0; i < divs.length; i++) {
