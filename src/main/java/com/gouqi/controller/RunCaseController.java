@@ -9,16 +9,14 @@ import com.gouqi.testcase.CollectionCase;
 import com.gouqi.testcase.CollectionCase2;
 import com.gouqi.testcase.CollectionCase4;
 import com.gouqi.testcase.CollectionCaseWarning;
-import com.gouqi.util.LogUtil;
-import com.gouqi.util.ReportUtil;
-import com.gouqi.util.TimeUtil;
-import com.gouqi.util.UrlUtil;
+import com.gouqi.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +111,11 @@ public class RunCaseController {
         report.setName(name);
         ReportUtil.storeRecord(report,resultList);
         LogUtil.endLog(report);
+        try {
+            MailSendUtil.sendMail(report);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorNum", errorNum);
         modelAndView.addObject("failNum", failNum);
