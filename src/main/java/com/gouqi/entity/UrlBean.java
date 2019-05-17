@@ -11,6 +11,7 @@ public class UrlBean {
     private String name;
     private String expectMs;
     private String method;
+    private Integer status;
 
     public String getUrl() {
         return url;
@@ -42,5 +43,13 @@ public class UrlBean {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

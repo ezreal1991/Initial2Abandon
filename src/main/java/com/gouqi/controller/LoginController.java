@@ -34,7 +34,7 @@ public class LoginController {
             modelAndView.setViewName("/login.jsp");
         } else {
             modelAndView.addObject("user", userBean);
-            modelAndView.setViewName("/WEB-INF/jsp/index.jsp");
+            modelAndView.setViewName("/WEB-INF/jsp/main.jsp");
         }
         return modelAndView;
     }

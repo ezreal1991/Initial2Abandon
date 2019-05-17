@@ -1,10 +1,16 @@
 package com.gouqi.controller;
 
 import com.gouqi.entity.ParamBean;
+import com.gouqi.entity.ReportBean;
 import com.gouqi.entity.TestCase;
 import com.gouqi.entity.UrlBean;
 import com.gouqi.service.RunCaseService;
 import com.gouqi.testcase.CollectionCase;
+import com.gouqi.testcase.CollectionCase2;
+import com.gouqi.testcase.CollectionCase4;
+import com.gouqi.testcase.CollectionCaseWarning;
+import com.gouqi.util.ReportUtil;
+import com.gouqi.util.TimeUtil;
 import com.gouqi.util.UrlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,7 +46,7 @@ public class RunCaseController {
      * @Param []
      **/
     @RequestMapping("/runcase.do")
-    public ModelAndView runCase() {
+    public ModelAndView runCase(String name) {
         List<UrlBean> urlBeanList = runCaseService.showAllUrls();
         // 环境变量中的url
         for (UrlBean urlBean : urlBeanList) {
@@ -56,7 +62,11 @@ public class RunCaseController {
             UrlUtil.getRealUrl(url);
         }
         List<TestCase> resultList = new ArrayList<TestCase>();
-        CollectionCase.run("第一个testcase", resultList);
+        name = name + TimeUtil.getTime("yyyy-MM-dd hh时mm分ss秒");
+        CollectionCase.run(name, resultList);
+        CollectionCase2.run(name, resultList);
+        CollectionCaseWarning.run(name, resultList);
+        CollectionCase4.run(name, resultList);
         int errorNum = 0;
         int failNum = 0;
         int warningNum = 0;
@@ -87,6 +97,19 @@ public class RunCaseController {
             iNum += testcase.getTotalList().size();
         }
 
+        ReportBean report = new ReportBean();
+        report.setErrorNum(errorNum);
+        report.setFailNum(failNum);
+        report.setWarningNum(warningNum);
+        report.setPassNum(passNum);
+        report.setIerrorNum(ierrorNum);
+        report.setIfailNum(ifailNum);
+        report.setIwarningNum(iwarningNum);
+        report.setIpassNum(ipassNum);
+        report.setiNum(iNum);
+        report.setCaseNum(resultList.size());
+        report.setName(name);
+        ReportUtil.storeRecord(report,resultList);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorNum", errorNum);
         modelAndView.addObject("failNum", failNum);
@@ -99,6 +122,7 @@ public class RunCaseController {
         modelAndView.addObject("iNum", iNum);
         modelAndView.addObject("caseNum", resultList.size());
         modelAndView.addObject("resultList", resultList);
+        modelAndView.addObject("name", name);
         modelAndView.setViewName("/WEB-INF/jsp/report.jsp");
         return modelAndView;
     }

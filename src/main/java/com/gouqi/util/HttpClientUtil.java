@@ -23,9 +23,9 @@ public class HttpClientUtil {
         String strResult = "";
         JSONObject jsonResult = null;
         Long startTime = TimeUtil.getTimeMs();
+        CloseableHttpClient client = HttpClients.createDefault();
         String time = TimeUtil.getTime("yyyy-MM-dd hh:mm:ss");
         itf.setStartTime(time);
-        CloseableHttpClient client = HttpClients.createDefault();
         // 发送get请求
         HttpGet request = new HttpGet(itf.getUrl());
         try {

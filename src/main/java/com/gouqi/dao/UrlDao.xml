@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gouqi.dao.UrlDao">
 	<select id="showAllUrls" resultType="com.gouqi.entity.UrlBean">
-		select * from url;
+		select * from url where status=0;
 	</select>
 	<select id="showAllParams" resultType="com.gouqi.entity.ParamBean">
 		select * from param;
