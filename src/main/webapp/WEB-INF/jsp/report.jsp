@@ -8,9 +8,6 @@
     <meta name='description' content=''/>
     <meta name='robots' content='noodp, noydir'/>
     <meta name='viewport' content='width=device-width, initial-scale=1'/>
-    <meta id="timeStampFormat" name="timeStampFormat"
-          content='MMM d, yyyy hh:mm:ss a'/>
-
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600'
           rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -37,47 +34,19 @@
 </head>
 
 <body class='extent standard default hide-overflow dark'>
-<div id='theme-selector' alt='切换主题，默认黑色' title='切换主题'>
-    <span><i class='material-icons'>desktop_windows</i></span>
-</div>
-
-<nav>
+<nav class="container">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo blue darken-3">Extent</a>
-
-        <!-- slideout menu -->
-        <ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
-            <li class='waves-effect active'><a href='#!' view='test-view'
-                                               onclick="configureView(0);chartsView('test');"><i
-                    class='material-icons'>dashboard</i></a></li>
-            <li class='waves-effect'><a href='#!' view='category-view'
-                                        onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
-            <li class='waves-effect'><a href='#!'
-                                        onclick="configureView(-1);chartsView('dashboard');"
-                                        view='dashboard-view'><i class='material-icons'>track_changes</i></a></li>
-        </ul>
-
         <!-- report name -->
-        <span class='report-name'>Test Report: Test Report 13时07分24秒</span>
-
+        <span class='report-name'>${name }</span>
         <!-- report headline -->
         <span class='report-headline'></span>
-
         <!-- nav-right -->
-        <ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
-            <li><a href='#!'> <span
-                    class='label suite-start-time blue darken-3'>{{
-						time.start_datetime }}</span>
-            </a></li>
-        </ul>
+
     </div>
 </nav>
-
 <!-- container -->
-<div class='container'>
-    <div id='test-view' class='view'>
-
-
+<div class="container">
+    <div id='test-view'>
         <div id='test-view-charts' class='subview-full'>
             <div id='charts-row' class='row nm-v nm-h'>
                 <div class='col s12 m6 l6 np-h'>
@@ -97,7 +66,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class='col s12 m6 l6 np-h'>
                     <div class='card-panel nm-v'>
                         <div class='left panel-name'>Suites</div>
@@ -108,60 +76,101 @@
                             interface result:<br/>
                         </div>
                         <div class='block text-small' style="margin-left: 90px">
-									<span id="pass_suites" class='tooltipped' data-position='top'>
-										total: ${iNum }<br/> pass: ${ipassNum }<br/> fail:
-                                        ${ifailNum }<br/>warning: ${iwarningNum }<br/>error:
-                                        ${ierrorNum }<br/>
-									</span>
+                            <span id="pass_suites" class='tooltipped' data-position='top'>
+                                total: ${iNum }<br/> pass: ${ipassNum }<br/> fail:
+                                ${ifailNum }<br/>warning: ${iwarningNum }<br/>error:
+                                ${ierrorNum }<br/>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class='subview-left left' style="width: 33%">
             <div class='view-summary'>
                 <h5>Suites</h5>
-                <c:forEach items="${resultList }" var="testcase">
-                    <c:if test="${testcase.caseResult == 'error' }">
-							<span class="red-text"> <br> <a style='color: red'
-                                                            href="javascript:void(0)"
-                                                            onclick="showDetail('${testcase.name}')">${testcase.name}</a>
-							</span>
-                        <span class="red-text" style="float: right">error</span>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${resultList }" var="testcase">
-                    <c:if test="${testcase.caseResult == 'fail' }">
-							<span class="red-text"> <br> <a style='color: red'
-                                                            href="javascript:void(0)"
-                                                            onclick="showDetail('${testcase.name}')">${testcase.name}</a>
-							</span>
-                        <span class="red-text" style="float: right">fail</span>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${resultList }" var="testcase">
-                    <c:if test="${testcase.caseResult == 'warning' }">
-							<span class="yellow-text"> <br> <a
-                                    style='color: #FFFF00' href="javascript:void(0)"
-                                    onclick="showDetail('${testcase.name}')">${testcase.name}</a>
-							</span>
-                        <span class="yellow-text" style="float: right">warning</span>
-                    </c:if>
-                </c:forEach>
-                <c:forEach items="${resultList }" var="testcase">
-                    <c:if test="${testcase.caseResult == 'pass' }">
-							<span class="green-text"> <br> <a
-                                    style='color: green' href="javascript:void(0)"
-                                    onclick="showDetail('${testcase.name}')">${testcase.name}</a>
-							</span>
-                        <span class="green-text" style="float: right">pass</span>
-                    </c:if>
-                </c:forEach>
+                <table>
+                    <tr>
+                        <td>name</td>
+                        <td>level</td>
+                        <td>result</td>
+                    </tr>
+                    <c:forEach items="${resultList }" var="testcase">
+                        <c:if test="${testcase.caseResult == 'error' }">
+                            <tr>
+                                <td>
+                                    <span class="red-text"> <a style='color: red'
+                                                               href="javascript:void(0)"
+                                                               onclick="showDetail('${testcase.name}')">${testcase.name}</a>
+							        </span>
+                                </td>
+                                <td>
+                                    <span class="red-text">${testcase.level}</span>
+                                </td>
+                                <td>
+                                    <span class="red-text">error</span>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${resultList }" var="testcase">
+                        <c:if test="${testcase.caseResult == 'fail' }">
+                            <tr>
+                                <td>
+                                    <span class="red-text">  <a style='color: red'
+                                                                href="javascript:void(0)"
+                                                                onclick="showDetail('${testcase.name}')">${testcase.name}</a>
+							        </span>
+                                </td>
+                                <td>
+                                    <span class="red-text">${testcase.level}</span>
+                                </td>
+                                <td>
+                                    <span class="red-text">fail</span>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${resultList }" var="testcase">
+                        <c:if test="${testcase.caseResult == 'warning' }">
+                            <tr>
+                                <td>
+                                    <span class="yellow-text">  <a style='color: yellow'
+                                                                   href="javascript:void(0)"
+                                                                   onclick="showDetail('${testcase.name}')">${testcase.name}</a>
+							        </span>
+                                </td>
+                                <td>
+                                    <span class="yellow-text">${testcase.level}</span>
+                                </td>
+                                <td>
+                                    <span class="yellow-text">warning</span>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${resultList }" var="testcase">
+                        <c:if test="${testcase.caseResult == 'pass' }">
+                            <tr>
+                                <td>
+                                    <span class="green-text">  <a style='color: green'
+                                                                  href="javascript:void(0)"
+                                                                  onclick="showDetail('${testcase.name}')">${testcase.name}</a>
+							        </span>
+                                </td>
+                                <td>
+                                    <span class="green-text">${testcase.level}</span>
+                                </td>
+                                <td>
+                                    <span class="green-text">pass</span>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </table>
             </div>
         </div>
         <!-- subview left -->
-
         <div class='subview-right right' style="width: 65%">
             <div class='view-summary'
                  style='overflow-y: auto; overflow-x: hidden; height: 730px; word-wrap: break-word; word-break: break-all;'>
@@ -202,7 +211,7 @@
                                 <span style="margin-left: 20px">time:
 										${interfaceinf.actualMs }ms<br/>url: ${interfaceinf.url }<br/>返回值：
                                         ${interfaceinf.jsonResult }<br/>
-									</span>
+								</span>
                                 <span class="red-text"> ${interfaceinf.msg }</span><br/><br/>
                             </c:if>
                             <c:if test="${interfaceinf.interfaceResult  == 'warning'}">
@@ -212,7 +221,7 @@
                                 <span style="margin-left: 20px">time:
 										${interfaceinf.actualMs }ms<br/>url: ${interfaceinf.url }<br/>返回值：
                                         ${interfaceinf.jsonResult }<br/> <br/>
-									</span>
+                                </span>
                             </c:if>
                             <c:if test="${interfaceinf.interfaceResult  == 'pass'}">
                                 <span class="green-text">${interfaceinf.name }</span>
