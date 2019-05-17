@@ -42,11 +42,11 @@ public class HttpClientUtil {
                 Long actTime = endTime - startTime;
                 itf.setActualMs(actTime.toString());
                 itf.setJsonResult(jsonResult);
-//                LogUtil.out.write(time + "\r\n");
-//                LogUtil.out.write("url : " + itf.getUrl() + "\r\n");
-//                LogUtil.out.write("返回值： " +jsonResult.toString() + "\r\n");
+                LogUtil.out.write(time + "\r\n");
+                LogUtil.out.write("url : " + itf.getUrl() + "\r\n");
+                LogUtil.out.write("返回值： " +jsonResult.toString() + "\r\n");
             } else {
-//                LogUtil.out.write("get请求提交失败:" + itf.getUrl());
+                LogUtil.out.write("get请求提交失败:" + itf.getUrl() + "\r\n");
             }
         } catch (IOException e) {
         } finally {

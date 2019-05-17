@@ -9,6 +9,7 @@ import com.gouqi.testcase.CollectionCase;
 import com.gouqi.testcase.CollectionCase2;
 import com.gouqi.testcase.CollectionCase4;
 import com.gouqi.testcase.CollectionCaseWarning;
+import com.gouqi.util.LogUtil;
 import com.gouqi.util.ReportUtil;
 import com.gouqi.util.TimeUtil;
 import com.gouqi.util.UrlUtil;
@@ -61,6 +62,7 @@ public class RunCaseController {
         for (UrlBean url : urlBeanList) {
             UrlUtil.getRealUrl(url);
         }
+        LogUtil.startLog();
         List<TestCase> resultList = new ArrayList<TestCase>();
         name = name + TimeUtil.getTime("yyyy-MM-dd hh时mm分ss秒");
         CollectionCase.run(name, resultList);
@@ -110,6 +112,7 @@ public class RunCaseController {
         report.setCaseNum(resultList.size());
         report.setName(name);
         ReportUtil.storeRecord(report,resultList);
+        LogUtil.endLog(report);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorNum", errorNum);
         modelAndView.addObject("failNum", failNum);
