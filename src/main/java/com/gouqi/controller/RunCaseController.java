@@ -62,7 +62,11 @@ public class RunCaseController {
         }
         LogUtil.startLog();
         List<TestCase> resultList = new ArrayList<TestCase>();
-        name = name + TimeUtil.getTime("yyyy-MM-dd hh时mm分ss秒");
+        if(name != null && !"".equals(name)){
+            name = name + " " + TimeUtil.getTime("yyyy-MM-dd hh时mm分ss秒");
+        } else {
+            name = TimeUtil.getTime("yyyy-MM-dd hh时mm分ss秒");
+        }
         CollectionCase.run(name, resultList);
         CollectionCase2.run(name, resultList);
         CollectionCaseWarning.run(name, resultList);
